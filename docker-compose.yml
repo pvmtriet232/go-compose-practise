@@ -22,10 +22,6 @@ services:
       POSTGRES_DB: api
       POSTGRES_USER: local-dev
       POSTGRES_HOST_AUTH_METHOD: trust
-
-volumes:
-  data:
-
   migrate: &basemigrate
     profiles: ["tools"]
     image: migrate/migrate
@@ -40,3 +36,6 @@ volumes:
     <<: *basemigrate
     entrypoint: migrate create -dir /tmp/migrations -ext sql
     command: ""
+
+volumes:
+  data:

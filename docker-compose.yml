@@ -25,3 +25,18 @@ services:
 
 volumes:
   data:
+
+  migrate: &basemigrate
+  profiles: ["tools"]
+  image: migrate/migrate
+  entrypoint: "migrate -database postgresql://local-dev@db/api?sslmode=disable -path /tmp/migrations"
+  command: up
+  links:
+    - db
+  volumes:
+    - ./migrations:/tmp/migrations
+
+create-migration:
+  <<: *basemigrate
+  entrypoint: migrate create -dir /tmp/migrations -ext sql
+  command: ""

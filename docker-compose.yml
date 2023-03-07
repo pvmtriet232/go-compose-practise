@@ -11,3 +11,11 @@ services:
       API_SERVER_ADDR: ":3000"
     ports:
     - "3000:3000"
+  db:
+    image: postgres:13-alpine
+    volumes:
+    - data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: api
+      POSTGRES_USER: local-dev
+      POSTGRES_HOST_AUTH_METHOD: trust

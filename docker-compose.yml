@@ -23,20 +23,20 @@ services:
       POSTGRES_USER: local-dev
       POSTGRES_HOST_AUTH_METHOD: trust
 
-volumes:
-  data:
-
-  migrate: &basemigrate
-  profiles: ["tools"]
-  image: migrate/migrate
-  entrypoint: "migrate -database postgresql://local-dev@db/api?sslmode=disable -path /tmp/migrations"
-  command: up
-  links:
-    - db
   volumes:
-    - ./migrations:/tmp/migrations
+    data:
 
-create-migration:
-  <<: *basemigrate
-  entrypoint: migrate create -dir /tmp/migrations -ext sql
-  command: ""
+    migrate: &basemigrate
+    profiles: ["tools"]
+    image: migrate/migrate
+    entrypoint: "migrate -database postgresql://local-dev@db/api?sslmode=disable -path /tmp/migrations"
+    command: up
+    links:
+      - db
+    volumes:
+      - ./migrations:/tmp/migrations
+
+  create-migration:
+    <<: *basemigrate
+    entrypoint: migrate create -dir /tmp/migrations -ext sql
+    command: ""

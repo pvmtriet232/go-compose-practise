@@ -58,5 +58,5 @@ func (s *APIServer) router() http.Handler {
 
 func (s *APIServer) defaultRoute(w http.ResponseWriter, r *http.Request) {
   w.WriteHeader(http.StatusOK)
-  w.Write([]byte("Hello World"))
+  w.Write([]byte("Hello triet"))
 }

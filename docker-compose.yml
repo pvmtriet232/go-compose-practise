@@ -9,8 +9,11 @@ services:
       - .:/opt/app/api
     environment:
       API_SERVER_ADDR: ":3000"
+      DATABASE_URL: postgres://local-dev@db/api?sslmode-disable
     ports:
     - "3000:3000"
+    links:
+    - db
   db:
     image: postgres:13-alpine
     volumes:
@@ -19,3 +22,6 @@ services:
       POSTGRES_DB: api
       POSTGRES_USER: local-dev
       POSTGRES_HOST_AUTH_METHOD: trust
+      
+  volumes:
+  data:

@@ -4,7 +4,6 @@ go 1.20
 
 require (
 	github.com/gorilla/mux v1.8.0
-	github.com/pvmtriet232/go-and-compose v0.0.0-20230307145648-fd7893004890
 	github.com/sirupsen/logrus v1.9.0
 	github.com/urfave/cli/v2 v2.25.0
 )

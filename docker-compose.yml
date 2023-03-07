@@ -6,10 +6,10 @@ services:
       context: .
       target: dev
     volumes:
-      - .:/opt/app/api
+    - .:/opt/app/api
     environment:
       API_SERVER_ADDR: ":3000"
-      DATABASE_URL: postgres://local-dev@db/api?sslmode-disable
+      DATABASE_URL: postgres://local-dev@db/api?sslmode=disable
     ports:
     - "3000:3000"
     links:
@@ -17,11 +17,11 @@ services:
   db:
     image: postgres:13-alpine
     volumes:
-    - data:/var/lib/postgresql/data
+      - data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: api
       POSTGRES_USER: local-dev
       POSTGRES_HOST_AUTH_METHOD: trust
-      
-  volumes:
+
+volumes:
   data:

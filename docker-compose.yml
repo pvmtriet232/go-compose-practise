@@ -23,8 +23,8 @@ services:
       POSTGRES_USER: local-dev
       POSTGRES_HOST_AUTH_METHOD: trust
 
-  volumes:
-    data:
+volumes:
+  data:
 
   migrate: &basemigrate
     profiles: ["tools"]

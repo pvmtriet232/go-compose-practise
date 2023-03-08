@@ -9,7 +9,6 @@ import (
 )
 
 func (s *APIServer) createItem(w http.ResponseWriter, req *http.Request) error {
-	return nil
 	item, err := s.storage.CreateItem(req.Context(), storage.CreateItemRequest{
 		Name: req.PostFormValue("name"),
 	})

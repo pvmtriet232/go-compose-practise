@@ -15,9 +15,11 @@ COPY . .
 ENV CGO_ENABLED=0
 
 RUN go get -d -v ./...
+RUN go mod tidy
 RUN go build -o /tmp/api-server ./*.go
 
 FROM busybox
 
 COPY --from=built /tmp/api-server /usr/bin/api-server
+EXPOSE 3000
 CMD ["api-server", "start"]

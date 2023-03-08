@@ -64,6 +64,9 @@ func apiServerCmd() *cli.Command {
 			if err != nil {
 				return err
 			}
+			if err != nil {
+				return err
+			}
 			return server.Start(stopper)
 		},
 	}

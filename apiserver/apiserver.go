@@ -14,6 +14,20 @@ import (
 
 var defaultStopTimeout = time.Second * 30
 
+type Endpoint struct {
+	handler EndpointFunc
+}
+
+type EndpointFunc func(w http.ResponseWriter, req *http.Request) error
+
+func (e Endpoint) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	if err := e.handler(w, req); err != nil {
+		logrus.WithError(err).Error("could not process request")
+		w.WriteHeader(http.StatusInternalServerError)
+		w.Write([]byte("internal server error"))
+	}
+}
+
 type APIServer struct {
 	addr    string
 	storage *storage.Storage
@@ -54,8 +68,9 @@ func (s *APIServer) Start(stop <-chan struct{}) error {
 
 func (s *APIServer) router() http.Handler {
 	router := mux.NewRouter()
-
 	router.HandleFunc("/", s.defaultRoute)
+	router.Methods("POST").Path("/items").Handler(Endpoint{s.createItem})
+	router.Methods("GET").Path("/items").Handler(Endpoint{s.listItems})
 	return router
 }
 

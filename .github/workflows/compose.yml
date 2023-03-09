@@ -23,4 +23,4 @@ jobs:
     # need checkout before using compose-action
     - uses: isbang/compose-action@v1.4.1
       with:
-        compose-file: "./docker/docker-compose.yml"
+        compose-file: "./docker/docker-composet.yml"

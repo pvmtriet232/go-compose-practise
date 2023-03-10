@@ -1,4 +1,4 @@
-*/*temp*
+*/*tmp*
 */Dockerfile
 */docker-compose.yml
 **/.git
